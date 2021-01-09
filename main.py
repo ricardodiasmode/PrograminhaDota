@@ -9,43 +9,7 @@ OfflanerHeroes = ["Nyx Assassin", "Underlord", "Visage", "Enigma", "Puck", "Nigh
 SuppHeroes = ["Nyx Assassin", "Visage", "Enigma", "Night Stalker", "Monkey King", "Bounty Hunter", "Puck", "Ogre Magi", "Shadow Shaman", "Mirana", "Dark Willow", "Omniknight", "Abaddon", "Bane", "Phoenix", "Sand King", "Clockwerk", "Void Spirit", "Warlock", "Spirit Breaker", "Pangolier", "Windranger", "Earthshaker", "Undying", "Tusk", "Leshrac", "Silencer", "Skywrath Mage", "Jakiro", "Earth Spirit", "Io", "Lich", "Pudge", "Batrider", "Vengeful Spirit", "Techies", "Hoodwink", "Witch Doctor", "Keeper of the Light", "Enchantress", "Nature's Prophet", "Kunkka", "Snapfire", "Tiny", "Rubick", "Lina", "Grimstroke", ]
 HardSuppHeroes = ["Ogre Magi", "Shadow Shaman", "Ancient Apparition", "Omniknight", "Abaddon", "Bane", "Winter Wyvern", "Treant Protector", "Oracle", "Warlock", "Crystal Maiden", "Chen", "Silencer", "Jakiro", "Lion", "Vengeful Spirit", "Dazzle", "Lich", "Disruptor", "Elder Titan", "Witch Doctor", "Keeper of the Light", "Enchantress", "Rubick", "Shadow Demon", "Grimstroke", ]
 
-'''
-# Getting all matches
-AllMatches_json = requests.get(
-    "https://api.opendota.com/api/publicMatches",
-    headers={"Accept": "application/json"}
-).json()
 
-MatchIndex = 0
-# Get all needed info about matches
-while MatchIndex < len(AllMatches_json):
-    # Verify if the match has the requirements
-    if AllMatches_json[MatchIndex]['avg_mmr'] and AllMatches_json[MatchIndex]['game_mode'] == 22 and 5200 > AllMatches_json[MatchIndex]['avg_mmr'] > 3800:
-        # print(AllMatches_json[x])
-
-        # Getting the match
-        match_ID = AllMatches_json[MatchIndex]['match_id']
-        MatchRequestURL = "https://api.opendota.com/api/matches/" + str(match_ID)
-        Match_json = requests.get(
-            MatchRequestURL,
-            headers={"Accept": "application/json"}
-        ).json()
-
-        # Getting the heroes of the current match
-        PlayerIndex = 0
-        while PlayerIndex < 10:
-            # Setting hero id to a variable
-            HeroID = Match_json['picks_bans'][PlayerIndex]['hero_id']
-            if Match_json['picks_bans'][PlayerIndex]['is_pick']:
-                # Incrementing the number of times that the hero was picked
-                HeroPickRate[HeroID] += 1
-                # Incrementing win rate
-                if Match_json['radiant_win'] and Match_json['picks_bans'][PlayerIndex]['team']:
-                    HeroWinRate[HeroID] += 1
-            PlayerIndex += 1
-
-    MatchIndex += 1
-'''
 """ Get hero stats """
 HeroStats_json = requests.get(
     "https://api.opendota.com/api/heroStats",
