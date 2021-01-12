@@ -21,8 +21,15 @@ HeroStats_json = requests.get(
 def GetHeroCounter(HeroId):
     Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-')
     Name = Name.lower()
-    page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
-    print(page)
+    Page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
+    for HeroCounterIndex in range(5):
+        # Getting hero name
+        CounterHeroName = (Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].get_text()
+        # Getting hero disadvantage
+        HeroDisadvantage = ((Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].find_next()).get_text()
+        # TODO: Dictionary that has as key CounterHeroName and as value HeroDisadvantage
+        print(CounterHeroName)
+        print(HeroDisadvantage)
 
 
 # Variable that saves the win rate
