@@ -1,6 +1,8 @@
 import requests
 import numpy as np
-import scrapy
+from lxml import html
+import scraper
+
 
 NumberOfHeroes = 120
 HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut", "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre", "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit", "Morphling", "Terrorblade", "Lifestealer", "Faceless Void", "Gyrocopter"]
@@ -9,12 +11,18 @@ OfflanerHeroes = ["Nyx Assassin", "Underlord", "Visage", "Enigma", "Puck", "Nigh
 SuppHeroes = ["Nyx Assassin", "Visage", "Enigma", "Night Stalker", "Monkey King", "Bounty Hunter", "Puck", "Ogre Magi", "Shadow Shaman", "Mirana", "Dark Willow", "Omniknight", "Abaddon", "Bane", "Phoenix", "Sand King", "Clockwerk", "Void Spirit", "Warlock", "Spirit Breaker", "Pangolier", "Windranger", "Earthshaker", "Undying", "Tusk", "Leshrac", "Silencer", "Skywrath Mage", "Jakiro", "Earth Spirit", "Io", "Lich", "Pudge", "Batrider", "Vengeful Spirit", "Techies", "Hoodwink", "Witch Doctor", "Keeper of the Light", "Enchantress", "Nature's Prophet", "Kunkka", "Snapfire", "Tiny", "Rubick", "Lina", "Grimstroke", ]
 HardSuppHeroes = ["Ogre Magi", "Shadow Shaman", "Ancient Apparition", "Omniknight", "Abaddon", "Bane", "Winter Wyvern", "Treant Protector", "Oracle", "Warlock", "Crystal Maiden", "Chen", "Silencer", "Jakiro", "Lion", "Vengeful Spirit", "Dazzle", "Lich", "Disruptor", "Elder Titan", "Witch Doctor", "Keeper of the Light", "Enchantress", "Rubick", "Shadow Demon", "Grimstroke", ]
 
-
 """ Get hero stats """
 HeroStats_json = requests.get(
     "https://api.opendota.com/api/heroStats",
     headers={"Accept": "application/json"}
 ).json()
+
+
+def GetHeroCounter(HeroId):
+    Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-')
+    Name = Name.lower()
+    page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
+    print(page)
 
 
 # Variable that saves the win rate
@@ -37,10 +45,6 @@ for x in range(NumberOfHeroes):
     HeroNameArray[x] = HeroName
     HeroNameBackupArray[x] = HeroNameArray[x]
 
-# Printing win rate before sort
-# for x in range(NumberOfHeroes):
-#    print(f'{HeroNameArray[x]} Win Rate: {HeroWinRateArray[x]}%.')
-
 # Sorting win rate array
 HeroWinRateArray = np.sort(HeroWinRateArray)
 
@@ -51,7 +55,9 @@ for x in range(NumberOfHeroes):
             HeroNameArray[y] = HeroNameBackupArray[x]
 
 # Printing win rate after sort
-for x in range(NumberOfHeroes):
-    for y in range(len(MidlanerHeroes)):
-        if MidlanerHeroes[y] == HeroNameArray[x]:
-            print(f'{HeroNameArray[x]} Win Rate: {HeroWinRateArray[x]}%.')
+# for x in range(NumberOfHeroes):
+    # for y in range(len(MidlanerHeroes)):
+        # if MidlanerHeroes[y] == HeroNameArray[x]:
+            # print(f'{HeroNameArray[x]} Win Rate: {HeroWinRateArray[x]}%.')
+
+GetHeroCounter(0)

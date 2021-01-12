@@ -11,7 +11,7 @@ class DotaScrape:
         self.session = requests.Session()
 
     def scrape(self):
-        ''''Returns all counters to a hero with all data unparsed'''
+        """Returns all counters to a hero with all data unparsed"""
         # TODO Save all data to a local file to manipulate (sorted by hero)
         headers = {
             'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'}
@@ -24,4 +24,4 @@ class DotaScrape:
 heroname = "anti-mage" # TODO feed {heroname} using HeroNameArray from main
 
 newScrape = DotaScrape(f'https://pt.dotabuff.com/heroes/{heroname}/counters')
-print(newScrape.scrape())
+# print(newScrape.scrape())
