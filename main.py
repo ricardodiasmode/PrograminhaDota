@@ -1,9 +1,12 @@
+""" The objective of this program is return the current best heroes of the meta """
 import requests
 import numpy as np
-from lxml import html
 import scraper
+import math
+from dataclasses import dataclass
 
 
+NumberOfRelevantCounters = 10
 NumberOfHeroes = 120
 HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut", "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre", "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit", "Morphling", "Terrorblade", "Lifestealer", "Faceless Void", "Gyrocopter"]
 MidlanerHeroes = ["Broodmother", "Lycan", "Clinkz", "Razor", "Monkey King", "Riki", "Arc Warden", "Visage", "Enigma", "Puck", "Lone Druid", "Tidehunter", "Alchemist", "Bloodseeker", "Invoker", "Troll Warlord", "Pugna", "Void Spirit", "Death Prophet", "Templar Assassin", "Dragon Knight", "Zeus", "Ursa", "Pangolier", "Windranger", "Huskar", "Earthshaker", "Necrophos", "Leshrac", "Silencer", "Drow Ranger", "Viper", "Timbersaw", "Naga Siren", "Storm Spirit", "Batrider", "Legion Commander", "Queen of Pain", "Anti-Mage", "Tinker", "Ember Spirit", "Shadow Fiend", "Brewmaster", "Medusa", "Mars", "Phantom Lancer", "Elder Titan", "Morphling", "Hoodwink", "Magnus", "Meepo", "Outworld Devourer", "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina", ]
@@ -18,39 +21,71 @@ HeroStats_json = requests.get(
 ).json()
 
 
+# Class that holds the hero counter
+@dataclass
+class HeroCounter:
+    Name: str
+    Disadvantage: float
+
+
 def GetHeroCounter(HeroId):
+    CurrentCounters = [HeroCounter for i in range(NumberOfRelevantCounters)]
     Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-')
     Name = Name.lower()
     Page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
-    for HeroCounterIndex in range(5):
+    for HeroCounterIndex in range(NumberOfRelevantCounters):
         # Getting hero name
         CounterHeroName = (Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].get_text()
         # Getting hero disadvantage
         HeroDisadvantage = ((Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].find_next()).get_text()
-        # TODO: Dictionary that has as key CounterHeroName and as value HeroDisadvantage
-        print(CounterHeroName)
-        print(HeroDisadvantage)
+        # Saving CounterHeroName and HeroDisadvantage
+        CurrentCounters[HeroCounterIndex].Name = CounterHeroName
+        CurrentCounters[HeroCounterIndex].Disadvantage = HeroDisadvantage
+    return CurrentCounters
+
+# TODO: Get hero pick rate
+def GetHeroPickRate(HeroId):
+    return 0
 
 
+# TODO: Get hero win rate by name
+def GetHeroWinRateByName(HeroName):
+    return 0
+
+
+def GetHeroWinRate(HeroId):
+    # Getting AncientWinRate
+    if HeroStats_json[HeroId]['6_pick'] != 0:
+        AncientWinRate = (HeroStats_json[HeroId]['6_win']) * 100 / HeroStats_json[HeroId]['6_pick']
+    # Getting DivideWinRate
+    if HeroStats_json[HeroId]['7_pick'] != 0:
+        DivineWinRate = (HeroStats_json[HeroId]['7_win']) * 100 / HeroStats_json[HeroId]['7_pick']
+    # Getting the mean of the Divine win rate and Ancient win rate which is my current bracket
+    return round(((DivineWinRate + AncientWinRate) / 2), 4)
+
+# Variable that saves the pick rate
+HeroPickRateBackupArray = np.zeros(NumberOfHeroes)
+HeroPickRateArray = np.zeros(NumberOfHeroes)
 # Variable that saves the win rate
 HeroWinRateBackupArray = np.zeros(NumberOfHeroes)
 HeroWinRateArray = np.zeros(NumberOfHeroes)
 # Variable that saves the heroes names
 HeroNameArray = [str for i in range(NumberOfHeroes)]
 HeroNameBackupArray = [str for i in range(NumberOfHeroes)]
-# Printing win rate of each hero
+# Saving win rate, pick rate and name of each hero
 for x in range(NumberOfHeroes):
-    HeroName = HeroStats_json[x]['localized_name']
-    if HeroStats_json[x]['6_pick'] != 0:
-        AncientWinRate = (HeroStats_json[x]['6_win']) * 100 / HeroStats_json[x]['6_pick']
-    if HeroStats_json[x]['7_pick'] != 0:
-        DivineWinRate = (HeroStats_json[x]['7_win']) * 100 / HeroStats_json[x]['7_pick']
-    # print(f'{HeroName}: Divine Win Rate: {DivineWinRate}%. Ancient Win Rate: {AncientWinRate}%.')
-    # Getting the mean of the Divine win rate and Ancient win rate which is my current bracket
-    HeroWinRateArray[x] = round(((DivineWinRate + AncientWinRate) / 2), 4)
+    # Getting Hero Name
+    HeroNameArray[x] = HeroStats_json[x]['localized_name']
+    # Getting Hero Win Rate
+    HeroWinRateArray[x] = GetHeroWinRate(x)
+    # Getting Hero Pick Rate
+    HeroPickRateArray[x] = GetHeroPickRate(x)
+    # Saving Win Rate with default index
     HeroWinRateBackupArray[x] = HeroWinRateArray[x]
-    HeroNameArray[x] = HeroName
+    # Saving Name with default index
     HeroNameBackupArray[x] = HeroNameArray[x]
+    # Saving Hero Pick Rate with default index
+    HeroPickRateBackupArray[x] = HeroPickRateArray[x]
 
 # Sorting win rate array
 HeroWinRateArray = np.sort(HeroWinRateArray)
@@ -61,10 +96,25 @@ for x in range(NumberOfHeroes):
         if HeroWinRateBackupArray[x] == HeroWinRateArray[y]:
             HeroNameArray[y] = HeroNameBackupArray[x]
 
-# Printing win rate after sort
-# for x in range(NumberOfHeroes):
-    # for y in range(len(MidlanerHeroes)):
-        # if MidlanerHeroes[y] == HeroNameArray[x]:
-            # print(f'{HeroNameArray[x]} Win Rate: {HeroWinRateArray[x]}%.')
+# TODO: Sorting Pick Rate array from the bigger to lower
 
-GetHeroCounter(0)
+'''
+# Printing win rate after sort 
+for x in range(NumberOfHeroes):
+    for y in range(len(MidlanerHeroes)):
+        if MidlanerHeroes[y] == HeroNameArray[x]:
+            print(f'{HeroNameArray[x]} Win Rate: {HeroWinRateArray[x]}%.')
+'''
+
+# Getting mean of top 10 picked heroes
+PickRatesMean = math.mean(HeroPickRateArray[0:9])
+
+# Getting CurrentHeroId's victory coefficient
+CurrentHeroId = 0
+HeroCounters = GetHeroCounter(CurrentHeroId)
+LossCoefficient = [for i in range(NumberOfRelevantCounters)]
+# Getting loss coefficient
+for i in range(NumberOfRelevantCounters):
+    LossCoefficient += (GetHeroWinRateByName(HeroCounters[i].Name)*HeroCounters[i].Disadvantage)/abs((GetHeroPickRate(CurrentHeroId) - PickRatesMean))
+VictoryCoefficient = GetHeroWinRate(CurrentHeroId) - LossCoefficient
+print(VictoryCoefficient)
