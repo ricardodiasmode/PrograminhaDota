@@ -2,17 +2,37 @@
 import requests
 import numpy as np
 import scraper
-import math
-from dataclasses import dataclass
-
 
 NumberOfRelevantCounters = 10
 NumberOfHeroes = 120
-HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut", "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre", "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit", "Morphling", "Terrorblade", "Lifestealer", "Faceless Void", "Gyrocopter"]
-MidlanerHeroes = ["Broodmother", "Lycan", "Clinkz", "Razor", "Monkey King", "Riki", "Arc Warden", "Visage", "Enigma", "Puck", "Lone Druid", "Tidehunter", "Alchemist", "Bloodseeker", "Invoker", "Troll Warlord", "Pugna", "Void Spirit", "Death Prophet", "Templar Assassin", "Dragon Knight", "Zeus", "Ursa", "Pangolier", "Windranger", "Huskar", "Earthshaker", "Necrophos", "Leshrac", "Silencer", "Drow Ranger", "Viper", "Timbersaw", "Naga Siren", "Storm Spirit", "Batrider", "Legion Commander", "Queen of Pain", "Anti-Mage", "Tinker", "Ember Spirit", "Shadow Fiend", "Brewmaster", "Medusa", "Mars", "Phantom Lancer", "Elder Titan", "Morphling", "Hoodwink", "Magnus", "Meepo", "Outworld Devourer", "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina", ]
-OfflanerHeroes = ["Nyx Assassin", "Underlord", "Visage", "Enigma", "Puck", "Night Stalker", "Lone Druid", "Tidehunter", "Beastmaster", "Dark Seer", "Omniknight", "Abaddon", "Phoenix", "Sand King", "Treant Protector", "Clockwerk", "Spirit Breaker", "Pangolier", "Slardar", "Earthshaker", "Necrophos", "Undying", "Tusk", "Leshrac", "Timbersaw", "Axe", "Legion Commander", "Earth Spirit", "Brewmaster", "Batrider", "Centaur Warrunner", "Mars", "Elder Titan", "Pudge", "Bristleback", "Nature's Prophet", "Tiny", "Doom", ]
-SuppHeroes = ["Nyx Assassin", "Visage", "Enigma", "Night Stalker", "Monkey King", "Bounty Hunter", "Puck", "Ogre Magi", "Shadow Shaman", "Mirana", "Dark Willow", "Omniknight", "Abaddon", "Bane", "Phoenix", "Sand King", "Clockwerk", "Void Spirit", "Warlock", "Spirit Breaker", "Pangolier", "Windranger", "Earthshaker", "Undying", "Tusk", "Leshrac", "Silencer", "Skywrath Mage", "Jakiro", "Earth Spirit", "Io", "Lich", "Pudge", "Batrider", "Vengeful Spirit", "Techies", "Hoodwink", "Witch Doctor", "Keeper of the Light", "Enchantress", "Nature's Prophet", "Kunkka", "Snapfire", "Tiny", "Rubick", "Lina", "Grimstroke", ]
-HardSuppHeroes = ["Ogre Magi", "Shadow Shaman", "Ancient Apparition", "Omniknight", "Abaddon", "Bane", "Winter Wyvern", "Treant Protector", "Oracle", "Warlock", "Crystal Maiden", "Chen", "Silencer", "Jakiro", "Lion", "Vengeful Spirit", "Dazzle", "Lich", "Disruptor", "Elder Titan", "Witch Doctor", "Keeper of the Light", "Enchantress", "Rubick", "Shadow Demon", "Grimstroke", ]
+HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut",
+            "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre",
+            "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit",
+            "Morphling", "Terrorblade", "Lifestealer", "Faceless Void", "Gyrocopter"]
+MidlanerHeroes = ["Broodmother", "Lycan", "Clinkz", "Razor", "Monkey King", "Riki", "Arc Warden", "Visage", "Enigma",
+                  "Puck", "Lone Druid", "Tidehunter", "Alchemist", "Bloodseeker", "Invoker", "Troll Warlord", "Pugna",
+                  "Void Spirit", "Death Prophet", "Templar Assassin", "Dragon Knight", "Zeus", "Ursa", "Pangolier",
+                  "Windranger", "Huskar", "Earthshaker", "Necrophos", "Leshrac", "Silencer", "Drow Ranger", "Viper",
+                  "Timbersaw", "Naga Siren", "Storm Spirit", "Batrider", "Legion Commander", "Queen of Pain",
+                  "Anti-Mage", "Tinker", "Ember Spirit", "Shadow Fiend", "Brewmaster", "Medusa", "Mars",
+                  "Phantom Lancer", "Elder Titan", "Morphling", "Hoodwink", "Magnus", "Meepo", "Outworld Devourer", "Outworld Destroyer"
+                  "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina", ]
+OfflanerHeroes = ["Nyx Assassin", "Underlord", "Visage", "Enigma", "Puck", "Night Stalker", "Lone Druid", "Tidehunter",
+                  "Beastmaster", "Dark Seer", "Omniknight", "Abaddon", "Phoenix", "Sand King", "Treant Protector",
+                  "Clockwerk", "Spirit Breaker", "Pangolier", "Slardar", "Earthshaker", "Necrophos", "Undying", "Tusk",
+                  "Leshrac", "Timbersaw", "Axe", "Legion Commander", "Earth Spirit", "Brewmaster", "Batrider",
+                  "Centaur Warrunner", "Mars", "Elder Titan", "Pudge", "Bristleback", "Nature's Prophet", "Tiny",
+                  "Doom", ]
+SuppHeroes = ["Nyx Assassin", "Visage", "Enigma", "Night Stalker", "Monkey King", "Bounty Hunter", "Puck", "Ogre Magi",
+              "Shadow Shaman", "Mirana", "Dark Willow", "Omniknight", "Abaddon", "Bane", "Phoenix", "Sand King",
+              "Clockwerk", "Void Spirit", "Warlock", "Spirit Breaker", "Pangolier", "Windranger", "Earthshaker",
+              "Undying", "Tusk", "Leshrac", "Silencer", "Skywrath Mage", "Jakiro", "Earth Spirit", "Io", "Lich",
+              "Pudge", "Batrider", "Vengeful Spirit", "Techies", "Hoodwink", "Witch Doctor", "Keeper of the Light",
+              "Enchantress", "Nature's Prophet", "Kunkka", "Snapfire", "Tiny", "Rubick", "Lina", "Grimstroke", ]
+HardSuppHeroes = ["Ogre Magi", "Shadow Shaman", "Ancient Apparition", "Omniknight", "Abaddon", "Bane", "Winter Wyvern",
+                  "Treant Protector", "Oracle", "Warlock", "Crystal Maiden", "Chen", "Silencer", "Jakiro", "Lion",
+                  "Vengeful Spirit", "Dazzle", "Lich", "Disruptor", "Elder Titan", "Witch Doctor",
+                  "Keeper of the Light", "Enchantress", "Rubick", "Shadow Demon", "Grimstroke", ]
 
 """ Get hero stats """
 HeroStats_json = requests.get(
@@ -21,36 +41,55 @@ HeroStats_json = requests.get(
 ).json()
 
 
-# Class that holds the hero counter
-@dataclass
-class HeroCounter:
-    Name: str
-    Disadvantage: float
+# Getting number of matches for all heroes
+NumberOfMatchesPlayed = 0
+for x in range(NumberOfHeroes):
+    NumberOfMatchesPlayed += HeroStats_json[x]['6_pick'] + HeroStats_json[x]['7_pick']
+
+
+def GetHeroVictoryCoefficient(HeroId):
+    HeroCountersNames, HeroCountersDisadvantage = GetHeroCounter(HeroId)
+    LossCoefficient = np.zeros(NumberOfRelevantCounters)
+    VictoryCoefficient = GetHeroWinRate(HeroId)
+    # Getting loss coefficient
+    for i in range(NumberOfRelevantCounters):
+        LossCoefficient[i] = round((GetHeroWinRateByName(HeroCountersNames[i]) * HeroCountersDisadvantage[i]),2)\
+                             / round(abs((GetHeroPickRate(i) - PickRatesMean)) * 10000, 2)
+        VictoryCoefficient -= round(LossCoefficient[i], 2)
+    return VictoryCoefficient
+
+
+def GetHeroIdByName(HeroName):
+    for i in range(NumberOfHeroes):
+        if HeroStats_json[i]['localized_name'] == "Outworld Devourer":
+            if HeroName == "Outworld Destroyer":
+                return i
+        if HeroStats_json[i]['localized_name'] == HeroName:
+            return i
 
 
 def GetHeroCounter(HeroId):
-    CurrentCounters = [HeroCounter for i in range(NumberOfRelevantCounters)]
+    CurrentCountersName = [str for i in range(NumberOfRelevantCounters)]
+    CurrentCountersDisadvantage = [float for i in range(NumberOfRelevantCounters)]
     Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-')
     Name = Name.lower()
     Page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
     for HeroCounterIndex in range(NumberOfRelevantCounters):
-        # Getting hero name
-        CounterHeroName = (Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].get_text()
         # Getting hero disadvantage
         HeroDisadvantage = ((Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].find_next()).get_text()
         # Saving CounterHeroName and HeroDisadvantage
-        CurrentCounters[HeroCounterIndex].Name = CounterHeroName
-        CurrentCounters[HeroCounterIndex].Disadvantage = HeroDisadvantage
-    return CurrentCounters
+        CurrentCountersName[HeroCounterIndex] = (Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].get_text()
+        HeroDisadvantage = HeroDisadvantage[:-1]
+        CurrentCountersDisadvantage[HeroCounterIndex] = float(HeroDisadvantage)
+    return CurrentCountersName, CurrentCountersDisadvantage
 
-# TODO: Get hero pick rate
+
 def GetHeroPickRate(HeroId):
-    return 0
+    return (HeroStats_json[HeroId]['6_pick'] + HeroStats_json[HeroId]['7_pick']) / NumberOfMatchesPlayed
 
 
-# TODO: Get hero win rate by name
 def GetHeroWinRateByName(HeroName):
-    return 0
+    return GetHeroWinRate(GetHeroIdByName(HeroName))
 
 
 def GetHeroWinRate(HeroId):
@@ -62,6 +101,7 @@ def GetHeroWinRate(HeroId):
         DivineWinRate = (HeroStats_json[HeroId]['7_win']) * 100 / HeroStats_json[HeroId]['7_pick']
     # Getting the mean of the Divine win rate and Ancient win rate which is my current bracket
     return round(((DivineWinRate + AncientWinRate) / 2), 4)
+
 
 # Variable that saves the pick rate
 HeroPickRateBackupArray = np.zeros(NumberOfHeroes)
@@ -96,25 +136,28 @@ for x in range(NumberOfHeroes):
         if HeroWinRateBackupArray[x] == HeroWinRateArray[y]:
             HeroNameArray[y] = HeroNameBackupArray[x]
 
-# TODO: Sorting Pick Rate array from the bigger to lower
-
-'''
-# Printing win rate after sort 
-for x in range(NumberOfHeroes):
-    for y in range(len(MidlanerHeroes)):
-        if MidlanerHeroes[y] == HeroNameArray[x]:
-            print(f'{HeroNameArray[x]} Win Rate: {HeroWinRateArray[x]}%.')
-'''
+# Sorting Pick Rate array from the bigger to lower
+HeroPickRateArray = np.sort(HeroPickRateArray)[::-1]
 
 # Getting mean of top 10 picked heroes
-PickRatesMean = math.mean(HeroPickRateArray[0:9])
+PickRatesMean = np.mean(HeroPickRateArray[0:9])
 
-# Getting CurrentHeroId's victory coefficient
-CurrentHeroId = 0
-HeroCounters = GetHeroCounter(CurrentHeroId)
-LossCoefficient = [for i in range(NumberOfRelevantCounters)]
-# Getting loss coefficient
-for i in range(NumberOfRelevantCounters):
-    LossCoefficient += (GetHeroWinRateByName(HeroCounters[i].Name)*HeroCounters[i].Disadvantage)/abs((GetHeroPickRate(CurrentHeroId) - PickRatesMean))
-VictoryCoefficient = GetHeroWinRate(CurrentHeroId) - LossCoefficient
-print(VictoryCoefficient)
+HCVC = np.zeros(len(HCHeroes))
+
+# Getting HC's victory coefficient
+for i in range(len(HCHeroes)):
+    HCVC[i] = GetHeroVictoryCoefficient(GetHeroIdByName(HCHeroes[i]))
+
+HCVCBackup = HCVC
+HCHeroesBackup = HCHeroes
+# Sorting HC's victory coefficient from the bigger to lower
+HCVC = np.sort(HCVC)[::-1]
+
+# Sorting name array according to HCVC array
+for x in range(len(HCHeroes)):
+    for y in range(len(HCHeroes)):
+        if HCVCBackup[x] == HCVC[y]:
+            HCHeroesBackup[y] = HCHeroes[x]
+
+for x in range(len(HCHeroes)):
+    print(f'{HCHeroesBackup[x]} victory coefficient: {HCVC[x]}')
