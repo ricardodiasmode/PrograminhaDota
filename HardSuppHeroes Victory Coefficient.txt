@@ -1,0 +1,27 @@
+HardSuppHeroes Victory coefficient:
+Ogre Magi: 270.654
+Shadow Shaman: 270.331
+Crystal Maiden: 269.897
+Winter Wyvern: 266.615
+Abaddon: 265.955
+Lion: 262.049
+Ancient Apparition: 259.926
+Treant Protector: 259.072
+Elder Titan: 254.958
+Omniknight: 249.264
+Jakiro: 248.95
+Warlock: 247.784
+Lich: 246.555
+Bane: 244.943
+Oracle: 244.194
+Disruptor: 243.606
+Chen: 243.4
+Rubick: 234.667
+Witch Doctor: 233.618
+Silencer: 229.38
+Vengeful Spirit: 227.541
+Grimstroke: 223.136
+Dazzle: 223.088
+Shadow Demon: 201.432
+Enchantress: 196.478
+Keeper of the Light: 194.922

@@ -1,0 +1,30 @@
+HCHeroes Victory coefficient:
+Razor: 283.672
+Lycan: 279.785
+Monkey King: 270.583
+Riki: 270.25
+Juggernaut: 266.657
+Weaver: 261.667
+Wraith King: 255.014
+Chaos Knight: 254.599
+Bloodseeker: 253.733
+Arc Warden: 252.182
+Clinkz: 251.317
+Luna: 250.749
+Troll Warlord: 247.156
+Ursa: 239.237
+Slark: 237.706
+Slardar: 233.19
+Naga Siren: 229.985
+Gyrocopter: 227.963
+Drow Ranger: 225.818
+Ember Spirit: 222.295
+Anti-Mage: 216.316
+Lifestealer: 215.156
+Morphling: 209.693
+Faceless Void: 209.455
+Medusa: 208.036
+Terrorblade: 205.216
+Spectre: 202.808
+Phantom Lancer: 200.358
+Sven: 193.856

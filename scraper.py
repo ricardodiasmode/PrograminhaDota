@@ -1,4 +1,7 @@
 import requests
+import json
+import os.path
+import os
 from bs4 import BeautifulSoup, SoupStrainer
 
 
@@ -16,3 +19,17 @@ class DotaScrape:
         source = response.text
         parse_tag = SoupStrainer('table', class_='sortable')
         return BeautifulSoup(source, 'html.parser', parse_only=parse_tag)
+
+
+def RequestHeroStats():
+    if os.path.isfile('HeroStats.txt'):
+        os.remove("HeroStats.txt")
+    HeroStats_json = requests.get(
+        "https://api.opendota.com/api/heroStats",
+        headers={"Accept": "application/json"}
+    ).json()
+    with open("HeroStats.txt", "w") as HeroStatsFile:
+        HeroStatsFile.write(json.dumps(HeroStats_json))
+    print("HeroStats file Updated!")
+    print("--------")
+    HeroStatsFile.close()

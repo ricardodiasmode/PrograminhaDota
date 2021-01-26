@@ -1,7 +1,10 @@
 """ The objective of this program is return the current best heroes of the meta """
-import requests
 import numpy as np
+import json
 import scraper
+import math
+from time import sleep
+from copy import deepcopy
 
 NumberOfRelevantCounters = 10
 NumberOfHeroes = 120
@@ -15,31 +18,33 @@ MidlanerHeroes = ["Broodmother", "Lycan", "Clinkz", "Razor", "Monkey King", "Rik
                   "Windranger", "Huskar", "Earthshaker", "Necrophos", "Leshrac", "Silencer", "Drow Ranger", "Viper",
                   "Timbersaw", "Naga Siren", "Storm Spirit", "Batrider", "Legion Commander", "Queen of Pain",
                   "Anti-Mage", "Tinker", "Ember Spirit", "Shadow Fiend", "Brewmaster", "Medusa", "Mars",
-                  "Phantom Lancer", "Elder Titan", "Morphling", "Hoodwink", "Magnus", "Meepo", "Outworld Devourer", "Outworld Destroyer"
-                  "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina", ]
+                  "Phantom Lancer", "Elder Titan", "Morphling", "Hoodwink", "Magnus", "Meepo",
+                  "Outworld Destroyer",
+                  "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina"]
 OfflanerHeroes = ["Nyx Assassin", "Underlord", "Visage", "Enigma", "Puck", "Night Stalker", "Lone Druid", "Tidehunter",
                   "Beastmaster", "Dark Seer", "Omniknight", "Abaddon", "Phoenix", "Sand King", "Treant Protector",
                   "Clockwerk", "Spirit Breaker", "Pangolier", "Slardar", "Earthshaker", "Necrophos", "Undying", "Tusk",
                   "Leshrac", "Timbersaw", "Axe", "Legion Commander", "Earth Spirit", "Brewmaster", "Batrider",
                   "Centaur Warrunner", "Mars", "Elder Titan", "Pudge", "Bristleback", "Nature's Prophet", "Tiny",
-                  "Doom", ]
+                  "Doom"]
 SuppHeroes = ["Nyx Assassin", "Visage", "Enigma", "Night Stalker", "Monkey King", "Bounty Hunter", "Puck", "Ogre Magi",
               "Shadow Shaman", "Mirana", "Dark Willow", "Omniknight", "Abaddon", "Bane", "Phoenix", "Sand King",
               "Clockwerk", "Void Spirit", "Warlock", "Spirit Breaker", "Pangolier", "Windranger", "Earthshaker",
               "Undying", "Tusk", "Leshrac", "Silencer", "Skywrath Mage", "Jakiro", "Earth Spirit", "Io", "Lich",
               "Pudge", "Batrider", "Vengeful Spirit", "Techies", "Hoodwink", "Witch Doctor", "Keeper of the Light",
-              "Enchantress", "Nature's Prophet", "Kunkka", "Snapfire", "Tiny", "Rubick", "Lina", "Grimstroke", ]
+              "Enchantress", "Nature's Prophet", "Kunkka", "Snapfire", "Tiny", "Rubick", "Lina", "Grimstroke"]
 HardSuppHeroes = ["Ogre Magi", "Shadow Shaman", "Ancient Apparition", "Omniknight", "Abaddon", "Bane", "Winter Wyvern",
                   "Treant Protector", "Oracle", "Warlock", "Crystal Maiden", "Chen", "Silencer", "Jakiro", "Lion",
                   "Vengeful Spirit", "Dazzle", "Lich", "Disruptor", "Elder Titan", "Witch Doctor",
-                  "Keeper of the Light", "Enchantress", "Rubick", "Shadow Demon", "Grimstroke", ]
+                  "Keeper of the Light", "Enchantress", "Rubick", "Shadow Demon", "Grimstroke"]
 
-""" Get hero stats """
-HeroStats_json = requests.get(
-    "https://api.opendota.com/api/heroStats",
-    headers={"Accept": "application/json"}
-).json()
-
+# Update hero stat file
+scraper.RequestHeroStats()
+# Getting hero stats in the file
+HeroStatsFile = open("HeroStats.txt", "r")
+HeroStatsAsStr = HeroStatsFile.read()
+HeroStats_json = json.loads(HeroStatsAsStr)
+HeroStatsFile.close()
 
 # Getting number of matches for all heroes
 NumberOfMatchesPlayed = 0
@@ -50,13 +55,36 @@ for x in range(NumberOfHeroes):
 def GetHeroVictoryCoefficient(HeroId):
     HeroCountersNames, HeroCountersDisadvantage = GetHeroCounter(HeroId)
     LossCoefficient = np.zeros(NumberOfRelevantCounters)
-    VictoryCoefficient = GetHeroWinRate(HeroId)
-    # Getting loss coefficient
+    VictoryCoefficient = NumberOfRelevantCounters*(GetHeroWinRate(HeroId)**1.5)
+    # Getting loss coefficient (probability of losing based on counters)
     for i in range(NumberOfRelevantCounters):
-        LossCoefficient[i] = round((GetHeroWinRateByName(HeroCountersNames[i]) * HeroCountersDisadvantage[i]),2)\
-                             / round(abs((GetHeroPickRate(i) - PickRatesMean)) * 10000, 2)
-        VictoryCoefficient -= round(LossCoefficient[i], 2)
-    return VictoryCoefficient
+        PickRate = GetHeroPickRate(i)*1000
+        Disadvantage = HeroCountersDisadvantage[i]
+        if PickRate < 1:
+            PickRate = 0
+        else:
+            PickRate = math.sqrt(PickRate)
+        if Disadvantage < 1:
+            Disadvantage = 1
+        else:
+            Disadvantage = math.sqrt(Disadvantage)
+        LossCoefficient[i] = math.sqrt(round((GetHeroWinRateByName(HeroCountersNames[i])**2) * Disadvantage * PickRate, 5))
+        VictoryCoefficient = VictoryCoefficient - LossCoefficient[i]
+    return round(VictoryCoefficient/10, 3)
+
+
+def GetVictoryCoefficientByPosition(PosHeroes, HeroesCount, PosHeroesDefault):
+    PosHeroesSorted = deepcopy(PosHeroesDefault)
+    PosVC = np.zeros(HeroesCount)
+    for i in range(len(PosHeroes)):
+        PosVC[i] = GetHeroVictoryCoefficient(GetHeroIdByName(PosHeroes[i]))
+    # Sorting Hero victory coefficient from the bigger to lower
+    IndexPos = np.argsort(PosVC)[::-1]
+    PosVC = np.sort(PosVC)[::-1]
+    # Sorting name array according to PosVC array
+    for CurrentIndex in range(len(PosHeroes)):
+        PosHeroesSorted[CurrentIndex] = PosHeroesDefault[IndexPos[CurrentIndex]]
+    return PosVC, PosHeroesSorted
 
 
 def GetHeroIdByName(HeroName):
@@ -71,14 +99,18 @@ def GetHeroIdByName(HeroName):
 def GetHeroCounter(HeroId):
     CurrentCountersName = [str for i in range(NumberOfRelevantCounters)]
     CurrentCountersDisadvantage = [float for i in range(NumberOfRelevantCounters)]
-    Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-')
+    Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-').replace("'", '')
     Name = Name.lower()
+    if Name == "outworld-devourer":
+        Name = "outworld-destroyer"
     Page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
+    print(f"Getting {Name}'s counters...")
     for HeroCounterIndex in range(NumberOfRelevantCounters):
         # Getting hero disadvantage
         HeroDisadvantage = ((Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].find_next()).get_text()
         # Saving CounterHeroName and HeroDisadvantage
-        CurrentCountersName[HeroCounterIndex] = (Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].get_text()
+        CurrentCountersName[HeroCounterIndex] = (Page.findAll("a", class_="link-type-hero"))[
+            HeroCounterIndex].get_text()
         HeroDisadvantage = HeroDisadvantage[:-1]
         CurrentCountersDisadvantage[HeroCounterIndex] = float(HeroDisadvantage)
     return CurrentCountersName, CurrentCountersDisadvantage
@@ -142,22 +174,55 @@ HeroPickRateArray = np.sort(HeroPickRateArray)[::-1]
 # Getting mean of top 10 picked heroes
 PickRatesMean = np.mean(HeroPickRateArray[0:9])
 
-HCVC = np.zeros(len(HCHeroes))
+# Getting Hc's victory coefficient
+print(f"Getting HC's Victory Coefficient...")
+HCVC, HCHeroesSorted = GetVictoryCoefficientByPosition(HCHeroes, len(HCHeroes), HCHeroes)
+sleep(10)
 
-# Getting HC's victory coefficient
-for i in range(len(HCHeroes)):
-    HCVC[i] = GetHeroVictoryCoefficient(GetHeroIdByName(HCHeroes[i]))
+print("--------")
+# Getting Mid's victory coefficient
+print(f"Getting MID's Victory Coefficient...")
+MIDVC, MIDHeroesSorted = GetVictoryCoefficientByPosition(MidlanerHeroes, len(MidlanerHeroes), MidlanerHeroes)
+sleep(10)
 
-HCVCBackup = HCVC
-HCHeroesBackup = HCHeroes
-# Sorting HC's victory coefficient from the bigger to lower
-HCVC = np.sort(HCVC)[::-1]
+print("--------")
+# Getting Off's victory coefficient
+print(f"Getting OFF's Victory Coefficient...")
+OFFVC, OFFHeroesSorted = GetVictoryCoefficientByPosition(OfflanerHeroes, len(OfflanerHeroes), OfflanerHeroes)
+sleep(10)
 
-# Sorting name array according to HCVC array
-for x in range(len(HCHeroes)):
-    for y in range(len(HCHeroes)):
-        if HCVCBackup[x] == HCVC[y]:
-            HCHeroesBackup[y] = HCHeroes[x]
+print("--------")
+# Getting Supp's victory coefficient
+print(f"Getting Supp's Victory Coefficient...")
+SUPPVC, SUPPHeroesSorted = GetVictoryCoefficientByPosition(SuppHeroes, len(SuppHeroes), SuppHeroes)
+sleep(10)
 
-for x in range(len(HCHeroes)):
-    print(f'{HCHeroesBackup[x]} victory coefficient: {HCVC[x]}')
+print("--------")
+# Getting HardSupp's victory coefficient
+print(f"Getting HardSupp's Victory Coefficient...")
+HARDSUPPVC, HARDSUPPHeroesSorted = GetVictoryCoefficientByPosition(HardSuppHeroes, len(HardSuppHeroes), HardSuppHeroes)
+print("--------")
+
+# Write in the file all Heroes victory coefficient
+Positions = [HCHeroes, MidlanerHeroes, OfflanerHeroes, SuppHeroes, HardSuppHeroes]
+HeroesSortedArray = [HCHeroesSorted, MIDHeroesSorted, OFFHeroesSorted, SUPPHeroesSorted, HARDSUPPHeroesSorted]
+AllVC = [HCVC, MIDVC, OFFVC, SUPPVC, HARDSUPPVC]
+for CurrentHeroIndex in range(len(Positions)):
+    if CurrentHeroIndex == 0:
+        CurrentPosName = "HCHeroes"
+    if CurrentHeroIndex == 1:
+        CurrentPosName = "MidlanerHeroes"
+    if CurrentHeroIndex == 2:
+        CurrentPosName = "OfflanerHeroes"
+    if CurrentHeroIndex == 3:
+        CurrentPosName = "SuppHeroes"
+    if CurrentHeroIndex == 4:
+        CurrentPosName = "HardSuppHeroes"
+    with open(f"{CurrentPosName} Victory Coefficient.txt", "w") as PosFile:
+        PosFile.write(f"{CurrentPosName} Victory coefficient:\n")
+        for x in range(len(Positions[CurrentHeroIndex])):
+            PosFile.write(
+                f"{HeroesSortedArray[CurrentHeroIndex][x]}: {AllVC[CurrentHeroIndex][x]}\n")
+    PosFile.close()
+    print(f"{CurrentPosName} Victory Coefficient Updated!")
+    print("--------")

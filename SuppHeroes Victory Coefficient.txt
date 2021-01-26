@@ -1,0 +1,48 @@
+SuppHeroes Victory coefficient:
+Nyx Assassin: 293.247
+Enigma: 287.487
+Bounty Hunter: 276.65
+Dark Willow: 273.485
+Puck: 272.445
+Ogre Magi: 270.654
+Monkey King: 270.583
+Shadow Shaman: 270.331
+Abaddon: 265.955
+Mirana: 263.564
+Sand King: 262.642
+Phoenix: 259.953
+Earthshaker: 258.786
+Night Stalker: 256.9
+Spirit Breaker: 254.818
+Hoodwink: 252.759
+Void Spirit: 252.187
+Leshrac: 251.562
+Windranger: 250.745
+Clockwerk: 250.522
+Tusk: 249.954
+Pangolier: 249.299
+Omniknight: 249.264
+Jakiro: 248.95
+Visage: 248.328
+Warlock: 247.784
+Undying: 247.668
+Lich: 246.555
+Skywrath Mage: 245.461
+Bane: 244.943
+Earth Spirit: 244.498
+Rubick: 234.667
+Witch Doctor: 233.618
+Lina: 231.761
+Silencer: 229.38
+Io: 228.41
+Pudge: 228.315
+Vengeful Spirit: 227.541
+Batrider: 224.842
+Techies: 223.923
+Grimstroke: 223.136
+Snapfire: 217.935
+Tiny: 210.767
+Kunkka: 209.889
+Nature's Prophet: 198.424
+Enchantress: 196.478
+Keeper of the Light: 194.922
