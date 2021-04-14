@@ -15,6 +15,7 @@ cursor = mydb.cursor()
 
 # cursor.execute("CREATE DATABASE mydatabase")
 
+# TODO "INSERT INTO table (id, name, age) VALUES(1, "A", 19) ON DUPLICATE KEY UPDATE name="A", age=19"
 
 cursor.execute("DROP TABLE IF EXISTS hardsupp")
 cursor.execute("DROP TABLE IF EXISTS softsupp")
@@ -25,7 +26,8 @@ cursor.execute("CREATE TABLE hardsupp (id INT AUTO_INCREMENT PRIMARY KEY, hero V
 cursor.execute("CREATE TABLE softsupp (id INT AUTO_INCREMENT PRIMARY KEY, hero VARCHAR(255), coefficient VARCHAR(255))")
 cursor.execute("CREATE TABLE offlane (id INT AUTO_INCREMENT PRIMARY KEY, hero VARCHAR(255), coefficient VARCHAR(255))")
 cursor.execute("CREATE TABLE midlane (id INT AUTO_INCREMENT PRIMARY KEY, hero VARCHAR(255), coefficient VARCHAR(255))")
-cursor.execute("CREATE TABLE hardcarry (id INT AUTO_INCREMENT PRIMARY KEY, hero VARCHAR(255), coefficient VARCHAR(255))")
+cursor.execute(
+    "CREATE TABLE hardcarry (id INT AUTO_INCREMENT PRIMARY KEY, hero VARCHAR(255), coefficient VARCHAR(255))")
 
 
 def hardsuppDB():
@@ -34,13 +36,14 @@ def hardsuppDB():
     file_content = file.readlines()
     file.close()
     unparsed_values = [line.split() for line in file_content]
-
+    print(unparsed_values)
     x = 1
     while x < 25:
         for i in unparsed_values[x]:
             values = (unparsed_values[x][0], unparsed_values[x][-1])
             cursor.execute(sql, values)
             x += 1
+
 
 def softsuppDB():
     sql = "INSERT INTO softsupp (hero, coefficient) VALUES (%s, %s)"
@@ -108,4 +111,3 @@ offlaneDB()
 midlaneDB()
 hardcarryDB()
 mydb.commit()
-

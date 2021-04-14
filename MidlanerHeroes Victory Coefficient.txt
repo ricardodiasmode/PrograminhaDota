@@ -1,59 +1,60 @@
 MidlanerHeroes Victory coefficient:
-Enigma: 287.487
-Razor: 283.672
-Alchemist: 280.36
-Lycan: 279.785
-Tidehunter: 274.842
-Puck: 272.445
-Monkey King: 270.583
-Riki: 270.25
-Broodmother: 270.217
-Earthshaker: 258.786
-Invoker: 258.219
-Pugna: 257.499
-Elder Titan: 254.958
-Bloodseeker: 253.733
-Hoodwink: 252.759
-Void Spirit: 252.187
-Arc Warden: 252.182
-Leshrac: 251.562
-Clinkz: 251.317
-Windranger: 250.745
-Pangolier: 249.299
-Visage: 248.328
-Death Prophet: 247.397
-Troll Warlord: 247.156
-Outworld Destroyer: 246.658
-Huskar: 245.759
-Ursa: 239.237
-Brewmaster: 236.671
-Dragon Knight: 236.664
-Storm Spirit: 235.878
-Legion Commander: 235.677
-Queen of Pain: 235.453
-Timbersaw: 235.415
-Viper: 233.264
-Shadow Fiend: 232.775
-Lone Druid: 231.784
-Lina: 231.761
-Templar Assassin: 230.235
-Naga Siren: 229.985
-Silencer: 229.38
-Necrophos: 227.585
-Drow Ranger: 225.818
-Mars: 224.995
-Batrider: 224.842
-Magnus: 223.16
-Ember Spirit: 222.295
-Tinker: 220.695
-Snapfire: 217.935
-Sniper: 217.338
-Anti-Mage: 216.316
-Tiny: 210.767
-Zeus: 209.979
-Kunkka: 209.889
-Morphling: 209.693
-Meepo: 208.038
-Medusa: 208.036
-Phantom Lancer: 200.358
-Nature's Prophet: 198.424
+Enigma: 299.843
+Visage: 295.121
+Razor: 283.552
+Alchemist: 276.76
+Windranger: 274.161
+Clinkz: 272.471
+Lycan: 268.391
+Pugna: 267.717
+Huskar: 266.712
+Elder Titan: 263.421
+Invoker: 263.237
+Tinker: 260.184
+Bloodseeker: 259.126
+Broodmother: 256.158
+Tidehunter: 255.88
+Puck: 253.806
+Earthshaker: 252.61
+Troll Warlord: 251.07
+Void Spirit: 250.034
+Naga Siren: 248.971
+Hoodwink: 246.655
+Ursa: 246.65
+Death Prophet: 245.234
+Necrophos: 241.657
+Pangolier: 240.95
+Monkey King: 240.801
+Riki: 240.633
+Storm Spirit: 239.978
+Phantom Lancer: 239.371
+Dragon Knight: 239.137
+Dawnbreaker: 237.178
+Drow Ranger: 237.163
+Outworld Destroyer: 236.793
+Brewmaster: 236.637
+Templar Assassin: 236.219
+Shadow Fiend: 235.46
+Queen of Pain: 234.499
+Timbersaw: 232.692
+Arc Warden: 229.713
+Legion Commander: 229.669
+Silencer: 229.455
+Lina: 229.027
+Leshrac: 227.514
+Sniper: 226.507
+Mars: 223.264
+Snapfire: 219.896
+Viper: 219.71
+Meepo: 218.146
+Tiny: 216.488
+Ember Spirit: 216.305
+Magnus: 213.656
+Anti-Mage: 213.414
+Lone Druid: 211.739
+Medusa: 207.881
+Morphling: 207.814
+Zeus: 206.678
+Kunkka: 202.978
+Nature's Prophet: 199.293
+Batrider: 183.283

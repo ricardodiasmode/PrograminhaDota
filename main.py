@@ -7,7 +7,7 @@ from time import sleep
 from copy import deepcopy
 
 NumberOfRelevantCounters = 10
-NumberOfHeroes = 120
+NumberOfHeroes = 121
 HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut",
             "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre",
             "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit",
@@ -20,13 +20,13 @@ MidlanerHeroes = ["Broodmother", "Lycan", "Clinkz", "Razor", "Monkey King", "Rik
                   "Anti-Mage", "Tinker", "Ember Spirit", "Shadow Fiend", "Brewmaster", "Medusa", "Mars",
                   "Phantom Lancer", "Elder Titan", "Morphling", "Hoodwink", "Magnus", "Meepo",
                   "Outworld Destroyer",
-                  "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina"]
+                  "Nature's Prophet", "Kunkka", "Sniper", "Snapfire", "Tiny", "Lina", "Dawnbreaker"]
 OfflanerHeroes = ["Nyx Assassin", "Underlord", "Visage", "Enigma", "Puck", "Night Stalker", "Lone Druid", "Tidehunter",
                   "Beastmaster", "Dark Seer", "Omniknight", "Abaddon", "Phoenix", "Sand King", "Treant Protector",
                   "Clockwerk", "Spirit Breaker", "Pangolier", "Slardar", "Earthshaker", "Necrophos", "Undying", "Tusk",
                   "Leshrac", "Timbersaw", "Axe", "Legion Commander", "Earth Spirit", "Brewmaster", "Batrider",
                   "Centaur Warrunner", "Mars", "Elder Titan", "Pudge", "Bristleback", "Nature's Prophet", "Tiny",
-                  "Doom"]
+                  "Doom", "Dawnbreaker"]
 SuppHeroes = ["Nyx Assassin", "Visage", "Enigma", "Night Stalker", "Monkey King", "Bounty Hunter", "Puck", "Ogre Magi",
               "Shadow Shaman", "Mirana", "Dark Willow", "Omniknight", "Abaddon", "Bane", "Phoenix", "Sand King",
               "Clockwerk", "Void Spirit", "Warlock", "Spirit Breaker", "Pangolier", "Windranger", "Earthshaker",
