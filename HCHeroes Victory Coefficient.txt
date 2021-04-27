@@ -1,30 +1,30 @@
 HCHeroes Victory coefficient:
-Razor: 283.552
-Luna: 277.225
-Clinkz: 272.471
-Lycan: 268.391
-Juggernaut: 263.659
-Gyrocopter: 259.585
-Bloodseeker: 259.126
-Weaver: 255.634
-Chaos Knight: 254.08
-Troll Warlord: 251.07
-Naga Siren: 248.971
-Ursa: 246.65
-Wraith King: 246.492
-Lifestealer: 242.87
-Monkey King: 240.801
-Riki: 240.633
-Phantom Lancer: 239.371
-Drow Ranger: 237.163
-Slardar: 233.661
-Faceless Void: 230.435
-Arc Warden: 229.713
-Slark: 229.256
-Ember Spirit: 216.305
-Spectre: 215.45
-Anti-Mage: 213.414
-Medusa: 207.881
-Morphling: 207.814
-Terrorblade: 199.647
-Sven: 194.809
+Clinkz: 275.889
+Bloodseeker: 275.695
+Luna: 272.71
+Razor: 271.22
+Chaos Knight: 262.566
+Drow Ranger: 259.836
+Riki: 257.933
+Juggernaut: 257.283
+Lycan: 256.09
+Faceless Void: 252.205
+Wraith King: 251.348
+Lifestealer: 250.528
+Gyrocopter: 247.159
+Weaver: 244.988
+Arc Warden: 242.819
+Phantom Lancer: 240.64
+Ursa: 238.929
+Slardar: 236.907
+Slark: 236.018
+Sven: 235.441
+Troll Warlord: 235.253
+Medusa: 231.634
+Naga Siren: 231.255
+Spectre: 229.325
+Monkey King: 224.07
+Morphling: 218.344
+Anti-Mage: 212.954
+Ember Spirit: 211.819
+Terrorblade: 203.865

@@ -1,60 +1,58 @@
 MidlanerHeroes Victory coefficient:
-Enigma: 299.843
-Visage: 295.121
-Razor: 283.552
-Alchemist: 276.76
-Windranger: 274.161
-Clinkz: 272.471
-Lycan: 268.391
-Pugna: 267.717
-Huskar: 266.712
-Elder Titan: 263.421
-Invoker: 263.237
-Tinker: 260.184
-Bloodseeker: 259.126
-Broodmother: 256.158
-Tidehunter: 255.88
-Puck: 253.806
-Earthshaker: 252.61
-Troll Warlord: 251.07
-Void Spirit: 250.034
-Naga Siren: 248.971
-Hoodwink: 246.655
-Ursa: 246.65
-Death Prophet: 245.234
-Necrophos: 241.657
-Pangolier: 240.95
-Monkey King: 240.801
-Riki: 240.633
-Storm Spirit: 239.978
-Phantom Lancer: 239.371
-Dragon Knight: 239.137
-Dawnbreaker: 237.178
-Drow Ranger: 237.163
-Outworld Destroyer: 236.793
-Brewmaster: 236.637
-Templar Assassin: 236.219
-Shadow Fiend: 235.46
-Queen of Pain: 234.499
-Timbersaw: 232.692
-Arc Warden: 229.713
-Legion Commander: 229.669
-Silencer: 229.455
-Lina: 229.027
-Leshrac: 227.514
-Sniper: 226.507
-Mars: 223.264
-Snapfire: 219.896
-Viper: 219.71
-Meepo: 218.146
-Tiny: 216.488
-Ember Spirit: 216.305
-Magnus: 213.656
-Anti-Mage: 213.414
-Lone Druid: 211.739
-Medusa: 207.881
-Morphling: 207.814
-Zeus: 206.678
-Kunkka: 202.978
-Nature's Prophet: 199.293
-Batrider: 183.283
+Clinkz: 275.889
+Bloodseeker: 275.695
+Dawnbreaker: 275.223
+Huskar: 272.919
+Invoker: 272.594
+Razor: 271.22
+Elder Titan: 270.696
+Meepo: 269.24
+Pugna: 267.302
+Windranger: 262.398
+Drow Ranger: 259.836
+Earthshaker: 259.385
+Alchemist: 258.718
+Riki: 257.933
+Lycan: 256.09
+Broodmother: 254.92
+Brewmaster: 253.973
+Necrophos: 252.35
+Tinker: 250.773
+Tidehunter: 248.156
+Puck: 245.047
+Arc Warden: 242.819
+Outworld Destroyer: 242.014
+Phantom Lancer: 240.64
+Silencer: 239.947
+Ursa: 238.929
+Dragon Knight: 238.068
+Leshrac: 237.124
+Void Spirit: 237.006
+Hoodwink: 236.741
+Death Prophet: 236.342
+Troll Warlord: 235.253
+Queen of Pain: 234.336
+Pangolier: 233.327
+Magnus: 232.994
+Shadow Fiend: 232.148
+Sniper: 231.823
+Templar Assassin: 231.711
+Medusa: 231.634
+Legion Commander: 231.382
+Naga Siren: 231.255
+Snapfire: 230.021
+Lina: 229.634
+Storm Spirit: 226.369
+Monkey King: 224.07
+Mars: 221.109
+Timbersaw: 220.749
+Lone Druid: 220.618
+Tiny: 218.511
+Morphling: 218.344
+Zeus: 218.216
+Viper: 215.68
+Anti-Mage: 212.954
+Ember Spirit: 211.819
+Kunkka: 208.646
+Batrider: 190.753
+Nature's Prophet: 189.408
