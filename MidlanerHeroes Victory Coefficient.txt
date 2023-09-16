@@ -1,58 +1,60 @@
 MidlanerHeroes Victory coefficient:
-Clinkz: 275.889
-Bloodseeker: 275.695
-Dawnbreaker: 275.223
-Huskar: 272.919
-Invoker: 272.594
-Razor: 271.22
-Elder Titan: 270.696
-Meepo: 269.24
-Pugna: 267.302
-Windranger: 262.398
-Drow Ranger: 259.836
-Earthshaker: 259.385
-Alchemist: 258.718
-Riki: 257.933
-Lycan: 256.09
-Broodmother: 254.92
-Brewmaster: 253.973
-Necrophos: 252.35
-Tinker: 250.773
-Tidehunter: 248.156
-Puck: 245.047
-Arc Warden: 242.819
-Outworld Destroyer: 242.014
-Phantom Lancer: 240.64
-Silencer: 239.947
-Ursa: 238.929
-Dragon Knight: 238.068
-Leshrac: 237.124
-Void Spirit: 237.006
-Hoodwink: 236.741
-Death Prophet: 236.342
-Troll Warlord: 235.253
-Queen of Pain: 234.336
-Pangolier: 233.327
-Magnus: 232.994
-Shadow Fiend: 232.148
-Sniper: 231.823
-Templar Assassin: 231.711
-Medusa: 231.634
-Legion Commander: 231.382
-Naga Siren: 231.255
-Snapfire: 230.021
-Lina: 229.634
-Storm Spirit: 226.369
-Monkey King: 224.07
-Mars: 221.109
-Timbersaw: 220.749
-Lone Druid: 220.618
-Tiny: 218.511
-Morphling: 218.344
-Zeus: 218.216
-Viper: 215.68
-Anti-Mage: 212.954
-Ember Spirit: 211.819
-Kunkka: 208.646
-Batrider: 190.753
-Nature's Prophet: 189.408
+Kunkka: 301.625
+Invoker: 297.378
+Nature's Prophet: 293.617
+Earthshaker: 288.474
+Riki: 271.732
+Dawnbreaker: 271.175
+Huskar: 270.755
+Brewmaster: 270.704
+Lycan: 270.14
+Visage: 265.259
+Outworld Destroyer: 263.661
+Zeus: 261.67
+Troll Warlord: 261.304
+Alchemist: 261.261
+Clinkz: 259.938
+Queen of Pain: 259.622
+Tinker: 257.944
+Phantom Lancer: 257.744
+Lone Druid: 256.863
+Elder Titan: 254.551
+Lina: 253.062
+Viper: 251.57
+Legion Commander: 251.441
+Death Prophet: 250.488
+Naga Siren: 249.133
+Shadow Fiend: 248.283
+Pangolier: 246.697
+Necrophos: 243.372
+Pugna: 243.328
+Arc Warden: 243.222
+Bloodseeker: 242.269
+Silencer: 242.006
+Meepo: 238.117
+Sniper: 236.775
+Void Spirit: 236.206
+Ursa: 235.933
+Templar Assassin: 231.136
+Razor: 230.713
+Hoodwink: 226.739
+Tidehunter: 224.333
+Dragon Knight: 220.683
+Leshrac: 220.16
+Snapfire: 218.715
+Drow Ranger: 217.946
+Monkey King: 217.207
+Puck: 214.175
+Storm Spirit: 212.088
+Magnus: 212.02
+Anti-Mage: 211.962
+Ember Spirit: 210.072
+Broodmother: 207.65
+Windranger: 204.727
+Tiny: 203.811
+Enigma: 199.122
+Mars: 198.6
+Morphling: 191.583
+Batrider: 187.812
+Medusa: 180.136
+Timbersaw: 160.415

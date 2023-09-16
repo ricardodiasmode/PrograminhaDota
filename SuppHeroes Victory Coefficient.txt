@@ -1,48 +1,48 @@
 SuppHeroes Victory coefficient:
-Enigma: 299.843
-Visage: 295.121
-Nyx Assassin: 285.503
-Dark Willow: 278.416
-Bounty Hunter: 277.703
-Windranger: 274.161
-Abaddon: 273.323
-Warlock: 271.816
-Shadow Shaman: 271.049
-Sand King: 269.696
-Night Stalker: 266.43
-Mirana: 261.62
-Spirit Breaker: 261.147
-Ogre Magi: 260.253
-Clockwerk: 258.461
-Io: 256.954
-Bane: 254.861
-Puck: 253.806
-Earthshaker: 252.61
-Skywrath Mage: 250.323
-Void Spirit: 250.034
-Vengeful Spirit: 249.052
-Omniknight: 248.453
-Lich: 248.279
-Hoodwink: 246.655
-Tusk: 246.406
-Earth Spirit: 245.29
-Jakiro: 244.927
-Pangolier: 240.95
-Monkey King: 240.801
-Undying: 240.584
-Phoenix: 239.368
-Witch Doctor: 235.428
-Rubick: 233.524
-Grimstroke: 229.73
-Silencer: 229.455
-Lina: 229.027
-Techies: 228.553
-Leshrac: 227.514
-Enchantress: 225.331
-Pudge: 222.816
-Snapfire: 219.896
-Tiny: 216.488
-Keeper of the Light: 205.288
-Kunkka: 202.978
-Nature's Prophet: 199.293
-Batrider: 183.283
+Vengeful Spirit: 302.532
+Kunkka: 301.625
+Nature's Prophet: 293.617
+Earthshaker: 288.474
+Undying: 274.323
+Io: 272.577
+Jakiro: 268.905
+Lich: 266.859
+Visage: 265.259
+Shadow Shaman: 265.227
+Warlock: 264.263
+Night Stalker: 259.887
+Phoenix: 258.605
+Dark Willow: 257.626
+Witch Doctor: 257.354
+Abaddon: 255.017
+Nyx Assassin: 254.234
+Grimstroke: 253.508
+Omniknight: 253.403
+Lina: 253.062
+Bane: 252.842
+Sand King: 251.703
+Bounty Hunter: 250.653
+Skywrath Mage: 250.278
+Pangolier: 246.697
+Silencer: 242.006
+Pudge: 240.719
+Earth Spirit: 240.627
+Tusk: 237.45
+Void Spirit: 236.206
+Ogre Magi: 236.127
+Spirit Breaker: 235.669
+Mirana: 229.446
+Keeper of the Light: 228.286
+Hoodwink: 226.739
+Clockwerk: 226.674
+Leshrac: 220.16
+Techies: 219.714
+Rubick: 219.078
+Snapfire: 218.715
+Monkey King: 217.207
+Puck: 214.175
+Windranger: 204.727
+Tiny: 203.811
+Enigma: 199.122
+Batrider: 187.812
+Enchantress: 164.983

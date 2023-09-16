@@ -7,7 +7,7 @@ from time import sleep
 from copy import deepcopy
 
 NumberOfRelevantCounters = 10
-NumberOfHeroes = 121
+NumberOfHeroes = 124
 HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut",
             "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre",
             "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit",
@@ -68,7 +68,8 @@ def GetHeroVictoryCoefficient(HeroId):
             Disadvantage = 1
         else:
             Disadvantage = math.sqrt(Disadvantage)
-        LossCoefficient[i] = math.sqrt(round((GetHeroWinRateByName(HeroCountersNames[i])**2) * Disadvantage * PickRate, 5))
+        HeroWinRate = GetHeroWinRateByName(HeroCountersNames[i]) ** 2
+        LossCoefficient[i] = math.sqrt(round(HeroWinRate * Disadvantage * PickRate, 5))
         VictoryCoefficient = VictoryCoefficient - LossCoefficient[i]
     return round(VictoryCoefficient/10, 3)
 

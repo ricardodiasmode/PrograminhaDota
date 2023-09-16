@@ -1,40 +1,40 @@
 OfflanerHeroes Victory coefficient:
-Enigma: 303.482
-Visage: 293.443
-Nyx Assassin: 289.163
-Dawnbreaker: 275.223
-Sand King: 273.684
-Dark Seer: 272.214
-Elder Titan: 270.696
-Omniknight: 267.852
-Spirit Breaker: 264.373
-Treant Protector: 263.834
-Beastmaster: 263.452
-Underlord: 260.235
-Earthshaker: 259.385
-Abaddon: 257.61
-Night Stalker: 255.366
-Centaur Warrunner: 254.679
-Brewmaster: 253.973
-Necrophos: 252.35
-Tidehunter: 248.156
-Axe: 245.695
-Puck: 245.047
-Earth Spirit: 239.672
-Clockwerk: 238.983
-Leshrac: 237.124
-Slardar: 236.907
-Tusk: 235.853
-Undying: 234.065
-Pangolier: 233.327
-Legion Commander: 231.382
-Pudge: 226.374
-Doom: 221.507
-Phoenix: 221.381
-Mars: 221.109
-Timbersaw: 220.749
-Lone Druid: 220.618
-Tiny: 218.511
-Bristleback: 213.218
-Batrider: 190.753
-Nature's Prophet: 189.408
+Treant Protector: 315.656
+Nature's Prophet: 293.617
+Earthshaker: 288.474
+Slardar: 277.596
+Undying: 274.323
+Dawnbreaker: 271.175
+Brewmaster: 270.704
+Visage: 265.259
+Dark Seer: 261.838
+Night Stalker: 259.887
+Phoenix: 258.605
+Lone Druid: 256.863
+Abaddon: 255.017
+Elder Titan: 254.551
+Nyx Assassin: 254.234
+Omniknight: 253.403
+Centaur Warrunner: 252.973
+Sand King: 251.703
+Legion Commander: 251.441
+Pangolier: 246.697
+Necrophos: 243.372
+Pudge: 240.719
+Earth Spirit: 240.627
+Tusk: 237.45
+Underlord: 235.742
+Spirit Breaker: 235.669
+Axe: 233.461
+Clockwerk: 226.674
+Tidehunter: 224.333
+Beastmaster: 222.03
+Leshrac: 220.16
+Bristleback: 217.786
+Doom: 214.272
+Puck: 214.175
+Tiny: 203.811
+Enigma: 199.122
+Mars: 198.6
+Batrider: 187.812
+Timbersaw: 160.415
