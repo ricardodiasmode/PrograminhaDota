@@ -6,9 +6,10 @@ import math
 from time import sleep
 from copy import deepcopy
 
-NumberOfRelevantCounters = 10
+NUMBER_OF_RELEVANT_COUNTERS = 10
 NumberOfHeroes = 124
-HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King", "Chaos Knight", "Juggernaut",
+HCHeroes = ["Lycan", "Clinkz", "Razor", "Arc Warden", "Riki", "Monkey King",
+            "Chaos Knight", "Juggernaut",
             "Wraith King", "Bloodseeker", "Troll Warlord", "Luna", "Ursa", "Slardar", "Weaver", "Spectre",
             "Drow Ranger", "Naga Siren", "Sven", "Slark", "Medusa", "Anti-Mage", "Phantom Lancer", "Ember Spirit",
             "Morphling", "Terrorblade", "Lifestealer", "Faceless Void", "Gyrocopter"]
@@ -41,7 +42,7 @@ HardSuppHeroes = ["Ogre Magi", "Shadow Shaman", "Ancient Apparition", "Omniknigh
 # Update hero stat file
 scraper.RequestHeroStats()
 # Getting hero stats in the file
-HeroStatsFile = open("HeroStats.txt", "r")
+HeroStatsFile = open("HeroStats.txt", "r", encoding='UTF-8')
 HeroStatsAsStr = HeroStatsFile.read()
 HeroStats_json = json.loads(HeroStatsAsStr)
 HeroStatsFile.close()
@@ -53,11 +54,12 @@ for x in range(NumberOfHeroes):
 
 
 def GetHeroVictoryCoefficient(HeroId):
+    """ Get hero victory coefficient """
     HeroCountersNames, HeroCountersDisadvantage = GetHeroCounter(HeroId)
-    LossCoefficient = np.zeros(NumberOfRelevantCounters)
-    VictoryCoefficient = NumberOfRelevantCounters*(GetHeroWinRate(HeroId)**1.5)
+    LossCoefficient = np.zeros(NUMBER_OF_RELEVANT_COUNTERS)
+    VictoryCoefficient = NUMBER_OF_RELEVANT_COUNTERS*(GetHeroWinRate(HeroId)**1.5)
     # Getting loss coefficient (probability of losing based on counters)
-    for i in range(NumberOfRelevantCounters):
+    for i in range(NUMBER_OF_RELEVANT_COUNTERS):
         PickRate = GetHeroPickRate(i)*1000
         Disadvantage = HeroCountersDisadvantage[i]
         if PickRate < 1:
@@ -95,18 +97,19 @@ def GetHeroIdByName(HeroName):
                 return i
         if HeroStats_json[i]['localized_name'] == HeroName:
             return i
+    return -1
 
 
 def GetHeroCounter(HeroId):
-    CurrentCountersName = [str for i in range(NumberOfRelevantCounters)]
-    CurrentCountersDisadvantage = [float for i in range(NumberOfRelevantCounters)]
+    CurrentCountersName = [str for i in range(NUMBER_OF_RELEVANT_COUNTERS)]
+    CurrentCountersDisadvantage = [float for i in range(NUMBER_OF_RELEVANT_COUNTERS)]
     Name = (HeroStats_json[HeroId]['localized_name']).replace(' ', '-').replace("'", '')
     Name = Name.lower()
     if Name == "outworld-devourer":
         Name = "outworld-destroyer"
     Page = (scraper.DotaScrape(f'https://pt.dotabuff.com/heroes/{Name}/counters')).scrape()
     print(f"Getting {Name}'s counters...")
-    for HeroCounterIndex in range(NumberOfRelevantCounters):
+    for HeroCounterIndex in range(NUMBER_OF_RELEVANT_COUNTERS):
         # Getting hero disadvantage
         HeroDisadvantage = ((Page.findAll("a", class_="link-type-hero"))[HeroCounterIndex].find_next()).get_text()
         # Saving CounterHeroName and HeroDisadvantage
